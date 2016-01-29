@@ -1,0 +1,4 @@
+func_one() main.c (folder/path_one)
+func_two() support.c (folder/path_two/foo)
+exc() master.c (folder/lib)
+ 

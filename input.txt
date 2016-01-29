@@ -1,4 +1,0 @@
-opentsk() tsk.c (tsk/kkoo)
-uuuuu() rrrr.c (tsk/ll_dd)
-success() mmm.c (tsk/yy)
- 

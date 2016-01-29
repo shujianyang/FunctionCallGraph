@@ -16,7 +16,11 @@ struct FuncInfo{
 
 int main()
 {
-    ifstream filein("input.txt");
+    string filename;
+    cout << "Please enter the input filename: ";
+    cin >> filename;
+
+    ifstream filein(filename);
     
     if(!filein.is_open()){
         cerr << "Error while opening file." << endl;
