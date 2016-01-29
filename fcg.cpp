@@ -40,17 +40,26 @@ int main()
     }
     maxHeader += 2;
     
-    int maxLength = list[0].function.length()/2;
-    for(FuncInfo &fi : list)
-        maxLength += fi.function.length()/2;
+    int maxLength = 0;
+    int preHalfLength = 0;
+    for(vector<FuncInfo>::iterator iter = list.begin();
+            iter != list.end();iter++){
+        int len = iter->function.length();
+        if(preHalfLength < len)
+            maxLength += len/2;
+        else
+            maxLength += preHalfLength;
+        preHalfLength = len / 2;
+    }
         
     int pos = 0;
-    for(vector<FuncInfo>::iterator iter= list.begin();
+    for(vector<FuncInfo>::iterator iter = list.begin();
             iter!=list.end();iter++){
         cout << setw(maxHeader) << left << iter->file;
         string line = "";
         line.append(pos, ' ');
         line.append(iter->function);
+	//cout << "(" << maxLength << "___" << line.length() << endl;
         line.append((maxLength - line.length() + 1), '.');
         pos += iter->function.length() / 2;
         cout << line << endl;
