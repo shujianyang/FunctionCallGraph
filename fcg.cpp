@@ -41,15 +41,14 @@ int main()
     maxHeader += 2;
     
     int maxLength = 0;
-    int preHalfLength = 0;
-    for(vector<FuncInfo>::iterator iter = list.begin();
-            iter != list.end();iter++){
-        int len = iter->function.length();
-        if(preHalfLength < len)
-            maxLength += len/2;
-        else
-            maxLength += preHalfLength;
-        preHalfLength = len / 2;
+    int preLength = 0;
+    int sumLength = 0;
+    for(FuncInfo &fi : list){
+        int len = fi.function.length();
+        sumLength += (len - preLength / 2 - preLength % 2);
+        if(sumLength > maxLength)
+            maxLength = sumLength;
+        preLength = len;
     }
         
     int pos = 0;
@@ -59,15 +58,14 @@ int main()
         string line = "";
         line.append(pos, ' ');
         line.append(iter->function);
-	//cout << "(" << maxLength << "___" << line.length() << endl;
-        line.append((maxLength - line.length() + 1), '.');
+        line.append((maxLength - line.length()), '.');
         pos += iter->function.length() / 2;
         cout << line << endl;
         
         cout << setw(maxHeader) << iter->folder;
         if(iter + 1 != list.end()){
             cout << setw(pos + 1) << right << "|" << endl;
-            cout << left << setw(maxHeader) << " ";
+            cout << left << setw(maxHeader) << "";
             cout << right << setw(pos + 1) << "|" << endl;
         }
         else
